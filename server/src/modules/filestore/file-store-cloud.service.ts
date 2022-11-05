@@ -1,6 +1,6 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { FileStoreCloudFile } from './file-store.interfaces';
-import { S3Client, PutObjectCommand, DeleteObjectCommand, GetObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { FileStoreUtils } from './file-store.utility';
 import { ConfigService } from '@nestjs/config';
 
@@ -15,7 +15,8 @@ export class FileStoreCloudService {
             credentials: {
                 accessKeyId: this.config.get('storage.accessKeyID'),
                 secretAccessKey: this.config.get('storage.secretAccessKey')
-            }
+            },
+            forcePathStyle: true
         });
     }
 
